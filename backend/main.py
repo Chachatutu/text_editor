@@ -1,13 +1,13 @@
 from datetime import datetime, timezone
 
 from fastapi import FastAPI
+from fastapi import HTTPException
 from pydantic import BaseModel
 from sqlalchemy import JSON, DateTime, String, create_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 
-
 app = FastAPI()
-engine = create_engine("sqlite:///./multidoc.db") # “sqlite:” 表示用sqlite这种数据库 “///” 本地 “./”当前文件所在文件夹下的文件
+engine = create_engine("sqlite:///./multidoc.db") # “sqlite:” 表示用sqlite这种数据库 “///” 本地 “./”当前工作目录
 SessionLocal = sessionmaker(bind=engine) 
 
 #自己建一个父类，方便批量管理数据表以及分层管理通用属性
@@ -25,6 +25,10 @@ class Document(Base):
 
 
 class DocumentCreate(BaseModel):
+    title: str
+    content: dict
+
+class DocumentUpdate(BaseModel):
     title: str
     content: dict
 
@@ -54,4 +58,28 @@ def create_document(data: DocumentCreate):
         "content" : document.content,
         "created_time" : document.created_time,
         "updated_time" : document.updated_time
+    }
+
+@app.put("/api/documents/{item_id}")
+def update_item(item_id: int, data: DocumentUpdate):
+    with SessionLocal() as session:
+        now = datetime.now(timezone.utc)
+        
+        item = session.get(Document, item_id)
+        if item is None:
+            raise HTTPException(status_code=404, detail="没有对应文件")
+        
+        item.title = data.title
+        item.content = data.content
+        item.updated_time = now
+
+        session.commit()
+        session.refresh(item)
+
+    return {
+        "id" : item.id,
+        "title" : item.title,
+        "content" : item.content,
+        "created_time" : item.created_time,
+        "updated_time" : item.updated_time
     }
