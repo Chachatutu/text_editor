@@ -6,8 +6,12 @@ from pydantic import BaseModel
 from sqlalchemy import JSON, DateTime, String, create_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 
+from pathlib import Path
+
 app = FastAPI()
-engine = create_engine("sqlite:///./multidoc.db") # “sqlite:” 表示用sqlite这种数据库 “///” 本地 “./”当前工作目录
+DATA_PATH = Path(__file__).resolve().parent / "multidoc.db"
+URL_OF_DATABASE = f"sqlite:///{DATA_PATH.as_posix()}"
+engine = create_engine(URL_OF_DATABASE) 
 SessionLocal = sessionmaker(bind=engine) 
 
 #自己建一个父类，方便批量管理数据表以及分层管理通用属性

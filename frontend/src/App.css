@@ -1,0 +1,64 @@
+.menu-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 0px 20px;
+  background-color:antiquewhite;
+}
+
+.menu-group {
+    position: relative;
+}
+
+.file {
+  background-color:peru;
+}
+.file-floating-panel {
+  padding: 6px;
+  gap: 4px;
+  background-color: peru;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.text {
+  background-color: peru;
+}
+.text-floating-panel {
+  padding: 6px;
+  gap: 4px;
+  background-color: peru;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.window {
+  background-color:peru;
+}
+.window-floating-panel {
+  padding: 6px;
+  gap: 4px;
+  background-color: peru;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.workspace {
+  background-color: antiquewhite ;
+  flex: 1;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+}
