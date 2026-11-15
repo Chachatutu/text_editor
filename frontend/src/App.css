@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   gap: 0px 20px;
-  background-color:antiquewhite;
+  background-color:rgb(186, 184, 184);
 }
 
 .menu-group {
@@ -10,12 +10,12 @@
 }
 
 .file {
-  background-color:peru;
+  background-color:aliceblue;
 }
 .file-floating-panel {
   padding: 6px;
   gap: 4px;
-  background-color: peru;
+  background-color: aliceblue;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -24,12 +24,12 @@
 }
 
 .text {
-  background-color: peru;
+  background-color: aliceblue;
 }
 .text-floating-panel {
   padding: 6px;
   gap: 4px;
-  background-color: peru;
+  background-color: aliceblue;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -38,12 +38,12 @@
 }
 
 .window {
-  background-color:peru;
+  background-color:aliceblue;
 }
 .window-floating-panel {
   padding: 6px;
   gap: 4px;
-  background-color: peru;
+  background-color: aliceblue;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -52,10 +52,19 @@
 }
 
 .workspace {
-  background-color: antiquewhite ;
+  display: flex;
+
   flex: 1;
 }
 
+.workspace > div:first-child {
+  background-color: rgb(186, 184, 184);
+  width: 168px;
+}
+.workspace > div:last-child {
+  flex: 1;
+  background-color: aliceblue ;
+}
 .app {
   min-height: 100vh;
   display: flex;

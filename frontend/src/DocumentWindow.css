@@ -1,0 +1,13 @@
+.documentWindow {
+    display: flex;
+    flex-direction: column;
+    min-height: 70%;
+    background-color: white;
+}
+.documentWindow > header{
+    background-color: rgba(15, 14, 14, 0.123);
+}
+.documentWindow > :last-child {
+    flex: 1;
+    background-color: white;
+}
