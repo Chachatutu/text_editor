@@ -71,7 +71,7 @@ function App() {
 
         <div>
           {currentDocument !==null &&
-            <DisplayDocumentWindow id={currentDocument.id} title={currentDocument.title} />
+            <DisplayDocumentWindow id={currentDocument.id} title={currentDocument.title} key={currentDocument.id} />
           }
         </div>
         
