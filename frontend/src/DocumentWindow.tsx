@@ -1,22 +1,25 @@
 import './DocumentWindow.css'
-import { useEditor, EditorContent } from '@tiptap/react'
+import { useEditor, EditorContent, Editor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-
 type documentWindowProps = {
     id: number
     title: string 
+    onEditorUpdate: (event: { editor:Editor}) => void
+
+    onActive: () => void
+    isActive: boolean
 }
 
 function DisplayDocumentWindow(props: documentWindowProps){
     const editor = useEditor({
         extensions: [StarterKit],
-        content: '<p></p>'
+        content: '<p></p>',
+        onUpdate: props.onEditorUpdate
     })
-    return <div className='documentWindow'>
+    return <div className='documentWindow' onPointerDownCapture={props.onActive}>
         
-        <header>
-            <strong>{props.id}</strong>--
-            {props.title}
+        <header className={props.isActive? 'docHead active':'docHead'}>
+            {props.id}--{props.title}
         </header>
 
         <div>

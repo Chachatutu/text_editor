@@ -1,7 +1,9 @@
 .documentWindow {
     display: flex;
     flex-direction: column;
-    min-height: 70%;
+    flex: 1;
+    min-height: 0;
+    min-width: 0;
     background-color: rgba(15, 14, 14, 0.123);
 }
 .documentWindow > header{
@@ -9,9 +11,17 @@
 }
 .documentWindow > :last-child {
     flex: 1;
-    background-color: rgba(15, 14, 14, 0.123);
+    min-height: 0;
+    background-color: burlywood;
+    overflow: auto;
 }
 .documentWindow > :last-child >:first-child {
     background-color: white;
     text-align: left;
+}
+.docHead{
+    background-color: rgba(15, 14, 14, 0.123);
+}
+.docHead.active{
+    background-color: lightgoldenrodyellow;
 }

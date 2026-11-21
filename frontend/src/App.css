@@ -59,12 +59,28 @@
 
 .workspace > div:first-child {
   background-color: rgb(186, 184, 184);
-  width: 168px;
+  flex: 0 0 168px;
 }
-.workspace > div:last-child {
+
+.windows.row {
   flex: 1;
   background-color: white ;
+  display: flex;
+  flex-direction: row;
 }
+.windows.row > .documentWindow{
+  flex:1 0 320px
+}
+.windows.column {
+  flex: 1;
+  background-color: white ;
+  display: flex;
+  flex-direction: column;
+}
+.windows.column > .documentWindow {
+  flex:1 0 320px
+}
+
 .app {
   min-height: 100vh;
   display: flex;
