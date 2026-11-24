@@ -5,6 +5,7 @@ from fastapi import HTTPException
 from pydantic import BaseModel
 from sqlalchemy import JSON, DateTime, String, create_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
+from sqlalchemy import select
 
 from pathlib import Path
 
@@ -87,3 +88,24 @@ def update_item(item_id: int, data: DocumentUpdate):
         "created_time" : item.created_time,
         "updated_time" : item.updated_time
     }
+
+
+@app.get("/api/documents")
+def get_list_of_document():
+    with SessionLocal() as session:
+        statement = select(Document.id, Document.title).order_by(Document.id.desc())
+        rows = session.execute(statement).mappings().all()
+        return [dict(row) for row in rows]
+
+@app.get("/api/documents/{item_id}")
+def get_documnet(item_id: int):
+    with SessionLocal() as session:
+        item = session.get(Document, item_id)
+        if item is None:
+            raise HTTPException(status_code=404, detail="没有对应文件")
+    return {
+        "id" : item.id,
+        "title" : item.title,
+        "content" : item.content,
+    }
+    
