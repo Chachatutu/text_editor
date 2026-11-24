@@ -1,6 +1,8 @@
 import './DocumentWindow.css'
 import { useEditor, EditorContent, Editor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+import { TextStyle, FontFamily } from '@tiptap/extension-text-style'
+import type { JSONContent } from '@tiptap/react'
 type documentWindowProps = {
     id: number
     title: string 
@@ -8,17 +10,29 @@ type documentWindowProps = {
 
     onActive: () => void
     isActive: boolean
+    offset: number
+
+    insertEditor: (id: number, editor: Editor) => void
+    removeEditor: (id: number) => void
+
+    initialContent: JSONContent
 }
 
 function DisplayDocumentWindow(props: documentWindowProps){
     const editor = useEditor({
-        extensions: [StarterKit],
-        content: '<p></p>',
-        onUpdate: props.onEditorUpdate
-    })
-    return <div className='documentWindow' onPointerDownCapture={props.onActive}>
+        extensions: [StarterKit, TextStyle, FontFamily],
+        content: props.initialContent,
+        onUpdate: props.onEditorUpdate,
+        onCreate: (event) => { return props.insertEditor(props.id, event.editor) },
+        onDestroy: () => { return props.removeEditor(props.id) }
         
-        <header className={props.isActive? 'docHead active':'docHead'}>
+    })
+
+    return <div className={props.isActive? 'documentWindow active':'documentWindow'} 
+                onPointerDownCapture={props.onActive} 
+                style={ {left: props.offset, top: props.offset} }
+            >
+        <header>
             {props.id}--{props.title}
         </header>
 

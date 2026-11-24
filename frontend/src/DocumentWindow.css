@@ -5,6 +5,7 @@
     min-height: 0;
     min-width: 0;
     background-color: rgba(15, 14, 14, 0.123);
+    z-index: 0;
 }
 .documentWindow > header{
     background-color: rgba(15, 14, 14, 0.123);
@@ -19,9 +20,29 @@
     background-color: white;
     text-align: left;
 }
-.docHead{
+
+
+
+
+.documentWindow.active {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    min-width: 0;
     background-color: rgba(15, 14, 14, 0.123);
+    z-index: 1;
 }
-.docHead.active{
-    background-color: lightgoldenrodyellow;
+.documentWindow.active > header{
+    background-color: lightblue;
+}
+.documentWindow.active > :last-child {
+    flex: 1;
+    min-height: 0;
+    background-color: burlywood;
+    overflow: auto;
+}
+.documentWindow.active > :last-child >:first-child {
+    background-color: white;
+    text-align: left;
 }
